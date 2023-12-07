@@ -134,7 +134,7 @@
           />
 
           <div>
-            <h2 class="text-5xl font-bold">À propos</h2>
+            <h2 class="text-center text-3xl font-bold md:text-5xl">À propos</h2>
             <p class="mt-3 text-2xl text-zinc-500">
               Car si vous êtes là vous ne me connaissez sûrement pas (ou alors
               vous êtes le prof)
@@ -164,7 +164,9 @@
               popup: discriminatedToggle()
             }"
         >
-          <h2 class="text-center text-5xl font-bold">Mes projets</h2>
+          <h2 class="text-center text-3xl font-bold md:text-5xl">
+            Mes projets
+          </h2>
           <p class="mt-3 text-center text-2xl text-zinc-500">
             Personnels, professionnels ou universitaires
           </p>
@@ -188,7 +190,7 @@
             class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
           >
             <template x-for="project in filter.filteredArray">
-              <div class="rounded-lg border border-zinc-800 p-4">
+              <div class="flex flex-col rounded-lg border border-zinc-800 p-4">
                 <img
                   @click="popup.toggleItem(project.name)"
                   :src="project.imageUrl"
@@ -223,19 +225,51 @@
                     <button
                       x-text="tag.name"
                       :style="{backgroundColor: tag.backgroundColor, color: tag.color}"
-                      class="rounded-full bg-black px-2 py-0.5"
+                      class="cursor-default rounded-full bg-black px-2 py-0.5"
                     ></button>
                   </template>
                 </div>
 
                 <!-- Project title -->
-                <h3 class="mt-3 text-2xl font-bold">
+                <h3 class="mb-1 mt-3 text-3xl font-bold">
                   <span x-text="project.name"></span>
                 </h3>
-                <p x-text="project?.description"></p>
+                <p x-text="project?.description" class="mb-2 text-zinc-400"></p>
+
+                <a
+                  href="/"
+                  class="mt-auto self-start rounded-full bg-blue-500 px-3 py-2 text-sm"
+                  >Découvrir</a
+                >
               </div>
             </template>
           </div>
+        </div>
+      </section>
+
+      <!-- Skills section -->
+      <section id="skills" class="container mx-auto mt-24">
+        <h2 class="text-center text-3xl font-bold md:text-5xl">
+          Mes compétences
+        </h2>
+        <p class="mt-3 text-center text-2xl text-zinc-500">Oui, j'en ai !</p>
+
+        <div
+          class="mt-24 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+          x-data="CategoriesService"
+        >
+          <template x-for="category in categories">
+            <div
+              :style="{borderColor: category.backgroundColor}"
+              class="grid aspect-[4/3] place-content-center place-items-center rounded-lg border p-4 transition-all hover:scale-105"
+            >
+              <span
+                :style="{color: category.backgroundColor}"
+                x-text="category.name"
+                class="text-xl font-medium"
+              ></span>
+            </div>
+          </template>
         </div>
       </section>
 
@@ -245,7 +279,7 @@
         class="container mx-auto mt-24"
         x-data="{questions: FAQService()}"
       >
-        <h2 class="text-center text-5xl font-bold">FAQ</h2>
+        <h2 class="text-center text-3xl font-bold md:text-5xl">FAQ</h2>
         <p class="mt-3 text-center text-2xl text-zinc-500">
           Les questions qu'on me pose souvent !
         </p>
@@ -287,7 +321,7 @@
                 x-show="isOpen(question)"
                 x-transition
                 x-text="question.answer"
-                class="bg-zinc-800 p-4"
+                class="ml-4 bg-zinc-800 p-4"
               ></div>
             </div>
           </template>
@@ -295,8 +329,8 @@
       </section>
 
       <!-- Contact section -->
-      <section id="contact" class="container mx-auto mt-24">
-        <h2 class="text-center text-5xl font-bold">Contact</h2>
+      <section id="contact" class="container mx-auto my-24 md:max-w-2xl">
+        <h2 class="text-center text-3xl font-bold md:text-5xl">Contact</h2>
         <p class="mt-3 text-center text-2xl text-zinc-500">
           Vous souhaitez discuter pour un projet ? Le formulaire vous attend !
         </p>
