@@ -12,7 +12,7 @@ export const PROJECTS = [
     categories: ["nextjs", "react", "typescript"],
   },
   {
-    name: "Atom API",
+    name: "Atom API Client",
     categories: ["htmx", "ocaml"],
   },
 

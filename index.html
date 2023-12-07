@@ -9,7 +9,7 @@
   <body class="bg-zinc-900 text-zinc-300">
     <nav
       x-data="toggle"
-      class="container sticky top-2 z-50 mx-auto rounded-lg bg-black bg-opacity-5 p-3 backdrop-blur-lg"
+      class="container sticky top-2 z-40 mx-auto rounded-lg bg-black bg-opacity-5 p-3 backdrop-blur-lg"
     >
       <!-- Hamburger -->
       <button class="p-4 md:hidden" @click="toggleOpen()">
@@ -130,7 +130,12 @@
       <!-- Projects section -->
       <section id="projects" x-data="ProjectsService" class="container mx-auto">
         <div
-          x-data="{categories: CategoriesService().categories, filter: filter(projects)}"
+          x-data="
+            { 
+              categories: CategoriesService().categories,
+              filter: filter(projects),
+              popup: discriminatedToggle()
+            }"
         >
           <h2 class="text-center text-5xl font-bold">Mes projets</h2>
           <p class="mt-3 text-center text-2xl text-zinc-500">
@@ -157,10 +162,29 @@
             <template x-for="project in filter.filteredArray">
               <div class="rounded-lg border border-zinc-800 p-4">
                 <img
+                  @click="popup.toggleItem(project.name)"
                   :src="project.imageUrl"
                   :alt="project.name"
-                  class="h-48 w-full rounded-lg object-cover"
+                  class="h-48 w-full cursor-pointer rounded-lg object-cover"
                 />
+
+                <div
+                  x-show="popup.openedItem === project.name"
+                  x-transition
+                  class="fixed inset-0 z-50 bg-black bg-opacity-50"
+                  @keydown="e => e.key === 'Escape' && popup.toggleItem(popup.openedItem)"
+                  @click="() => popup.toggleItem(popup.openedItem)"
+                >
+                  <div
+                    class="grid h-full place-content-center place-items-center"
+                  >
+                    <img
+                      class="w-3/4 object-cover"
+                      :src="projects.find(p => p.name === project.name)?.imageUrl"
+                      @click="e => e.stopPropagation()"
+                    />
+                  </div>
+                </div>
 
                 <!-- Project tags -->
                 <div class="mt-4 flex flex-wrap items-center gap-2">
@@ -179,7 +203,7 @@
                 <h3 class="mt-3 text-2xl font-bold">
                   <span x-text="project.name"></span>
                 </h3>
-                <p>some cool descrpition</p>
+                <p x-text="project?.description"></p>
               </div>
             </template>
           </div>
@@ -231,7 +255,13 @@
                 </svg>
               </div>
 
-              <div x-show="isOpen(question)" class="bg-gray-400 p-4">open!</div>
+              <div
+                x-show="isOpen(question)"
+                x-transition
+                class="bg-zinc-800 p-4"
+              >
+                open!
+              </div>
             </div>
           </template>
         </div>
@@ -249,7 +279,6 @@
           x-data="contactForm"
           @submit="e => {e.preventDefault(); submit()}"
         >
-          <span x-text="console.log(errors)"></span>
           <div class="grid grid-cols-2 gap-4">
             <div class="flex flex-col">
               <label for="name">Nom</label>
