@@ -8,7 +8,7 @@
   </head>
   <body class="bg-zinc-900 text-zinc-300">
     <nav
-      class="container sticky top-2 z-50 mx-auto rounded-lg bg-black bg-opacity-5 py-3 backdrop-blur-lg"
+      class="container sticky top-2 z-50 mx-auto rounded-lg bg-black bg-opacity-5 p-3 backdrop-blur-lg"
     >
       <ul class="container mx-auto flex items-center justify-between gap-4">
         <div class="flex items-center gap-4">
@@ -31,7 +31,7 @@
         <li>
           <a
             href="#portfolio"
-            class="rounded-lg bg-gray-400 px-2 py-1 transition-all active:translate-y-2"
+            class="rounded-full bg-blue-500 px-3 py-2 text-lg font-semibold text-black transition-all active:translate-y-2"
           >
             Portfolio
           </a>
@@ -41,8 +41,8 @@
 
     <main>
       <section id="home" class="container relative mx-auto py-36">
-        <div class="flex flex-col items-center justify-center gap-5">
-          <h1 class="text-6xl font-bold">Hello! Je suis Romain</h1>
+        <div class="flex flex-col items-center justify-center gap-5 px-2">
+          <h1 class="text-center text-6xl font-bold">Hello! Je suis Romain</h1>
           <p class="max-w-lg text-center text-3xl text-zinc-500">
             Un développeur passionné par
             <span class="font-semibold text-blue-400">Typescript</span>,
@@ -92,8 +92,8 @@
             Personnels, professionnels ou universitaires
           </p>
 
-          <!-- Filters -->
-          <div class="mt-4 flex items-center gap-2">
+          <!-- Categories filter -->
+          <div class="mx-auto mt-8 flex flex-wrap items-center gap-2">
             <template x-for="category in categories">
               <button
                 x-text="category.name"
@@ -106,7 +106,9 @@
           </div>
 
           <!-- Projects grid -->
-          <div class="mt-4 grid grid-cols-4 gap-4">
+          <div
+            class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+          >
             <template x-for="project in filter.filteredArray">
               <div class="rounded-lg border border-zinc-800 p-4">
                 <img
@@ -116,7 +118,7 @@
                 />
 
                 <!-- Project tags -->
-                <div class="flex flex-wrap items-center gap-2">
+                <div class="mt-4 flex flex-wrap items-center gap-2">
                   <template
                     x-for="tag in project.categories.map(c => categories.find(category => category.id === c))"
                   >
@@ -129,9 +131,10 @@
                 </div>
 
                 <!-- Project title -->
-                <h3 class="font-bold">
+                <h3 class="mt-3 text-2xl font-bold">
                   <span x-text="project.name"></span>
                 </h3>
+                <p>some cool descrpition</p>
               </div>
             </template>
           </div>
@@ -145,6 +148,9 @@
         x-data="{questions: [1,2,3,4,5]}"
       >
         <h2 class="text-center text-5xl font-bold">FAQ</h2>
+        <p class="mt-3 text-center text-2xl text-zinc-500">
+          Les questions qu'on me pose souvent !
+        </p>
 
         <div class="mt-8" x-data="discriminatedToggle()">
           <template x-for="question in questions">
@@ -189,6 +195,10 @@
       <!-- Contact section -->
       <section id="contact" class="container mx-auto mt-24">
         <h2 class="text-center text-5xl font-bold">Contact</h2>
+        <p class="mt-3 text-center text-2xl text-zinc-500">
+          Vous souhaitez discuter pour un projet ? Le formulaire vous attend !
+        </p>
+
         <form class="mt-8">
           <div class="grid grid-cols-2 gap-4">
             <div class="flex flex-col">
