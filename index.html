@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-pt-24 scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
@@ -95,7 +95,8 @@
             <span class="font-semibold text-orange-300">Rust</span>
           </p>
 
-          <button
+          <a
+            href="#projects"
             class="mt-4 flex items-center gap-2 rounded-full bg-blue-500 px-6 py-4 text-xl font-medium text-black transition-all hover:shadow-sm hover:shadow-blue-600 active:scale-95"
           >
             Découvrir les projets
@@ -115,7 +116,7 @@
                 style="--darkreader-inline-fill: currentColor"
               ></path>
             </svg>
-          </button>
+          </a>
         </div>
 
         <div class="absolute h-12 w-12 bg-purple-400 blur-3xl"></div>
@@ -125,10 +126,36 @@
       </section>
 
       <!-- About section -->
-      <section id="about" class="container mx-auto">à propos</section>
+      <section id="about" class="container mx-auto">
+        <div class="flex flex-col items-center gap-16 lg:flex-row">
+          <img
+            src="https://rlsv-v4.leblondromain.repl.co/img/me.png"
+            class="w-full max-w-lg rounded-full"
+          />
+
+          <div>
+            <h2 class="text-5xl font-bold">À propos</h2>
+            <p class="mt-3 text-2xl text-zinc-500">
+              Car si vous êtes là vous ne me connaissez sûrement pas (ou alors
+              vous êtes le prof)
+            </p>
+            <p class="mt-8 text-2xl text-zinc-500">
+              Je suis Romain, un développeur matrixé par les nouvelles
+              technologies. Au fil de ces dernières années, je me suis
+              spécialisé en Typescript, qui est devenu mon language préféré,
+              mais je cherche toujours à m'améliorer en découvrant de nouveaux
+              langages comme récemment OCaml ou Rust
+            </p>
+          </div>
+        </div>
+      </section>
 
       <!-- Projects section -->
-      <section id="projects" x-data="ProjectsService" class="container mx-auto">
+      <section
+        id="projects"
+        x-data="ProjectsService"
+        class="container mx-auto mt-32"
+      >
         <div
           x-data="
             { 
@@ -143,7 +170,7 @@
           </p>
 
           <!-- Categories filter -->
-          <div class="mx-auto mt-8 flex flex-wrap items-center gap-2">
+          <div class="mx-auto mt-16 flex flex-wrap items-center gap-2">
             Filtrer par
             <template x-for="category in categories">
               <button
@@ -326,7 +353,7 @@
 
             <button
               type="submit"
-              class="col-span-2 w-full rounded-full bg-blue-400 px-4 py-2"
+              class="col-span-2 col-start-1 w-full rounded-full bg-blue-500 px-4 py-4 text-black md:col-start-2"
             >
               Envoyer le message
             </button>
