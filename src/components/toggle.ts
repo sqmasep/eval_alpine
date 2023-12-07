@@ -1,7 +1,7 @@
 // toggle pour un item indépendant
 export const toggle = (isDefaultOpen: boolean = false) => ({
-  open: isDefaultOpen,
+  isOpen: isDefaultOpen,
   toggleOpen() {
-    this.open = !this.open;
+    this.isOpen = !this.isOpen;
   },
 });
