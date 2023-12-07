@@ -21,6 +21,16 @@ export const PROJECTS = [
     imageUrl: "https://rlsv-v4.leblondromain.repl.co/img/reals/rlsv-v4.png",
     categories: ["pugjs"],
   },
+  {
+    name: "console-kit",
+    imageUrl: "",
+    categories: ["typescript"],
+  },
+  {
+    name: "SAE302",
+    imageUrl: "",
+    categories: ["express", "typescript", "react"],
+  },
 ] as const satisfies readonly {
   name: string;
   imageUrl?: string;

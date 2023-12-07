@@ -35,6 +35,12 @@ export const CATEGORIES = [
     color: "#fff",
     id: "pugjs",
   },
+  {
+    name: "Express",
+    backgroundColor: "#000000",
+    color: "#fff",
+    id: "express",
+  },
 ] as const satisfies readonly {
   name: string;
   backgroundColor: string;

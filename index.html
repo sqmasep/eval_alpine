@@ -80,7 +80,7 @@
       </section>
 
       <!-- About section -->
-      <section id="about" class="container mx-auto">à propos</section>
+      <section id="about" class="container mx-auto"></section>
 
       <!-- Projects section -->
       <section id="projects" x-data="ProjectsService" class="container mx-auto">
@@ -88,17 +88,17 @@
           x-data="{categories: CategoriesService().categories, filter: filter(projects)}"
         >
           <h2 class="text-center text-5xl font-bold">Mes projets</h2>
-          <p class="text-center">
+          <p class="mt-3 text-center text-2xl text-zinc-500">
             Personnels, professionnels ou universitaires
           </p>
 
           <!-- Filters -->
-          <div class="flex items-center gap-2">
+          <div class="mt-4 flex items-center gap-2">
             <template x-for="category in categories">
               <button
                 x-text="category.name"
                 :style="{backgroundColor: category.backgroundColor, color: category.color}"
-                class="rounded-full border-4 border-solid bg-black px-2 py-1 text-lg"
+                class="rounded-full border-4 border-solid bg-black px-2 py-0.5"
                 @click="filter.toggleFilter(category.id)"
                 :class="filter.isActive(category.id) ? 'border-zinc-400' : 'border-transparent'"
               ></button>
@@ -114,6 +114,21 @@
                   :alt="project.name"
                   class="h-48 w-full rounded-lg object-cover"
                 />
+
+                <!-- Project tags -->
+                <div class="flex flex-wrap items-center gap-2">
+                  <template
+                    x-for="tag in project.categories.map(c => categories.find(category => category.id === c))"
+                  >
+                    <button
+                      x-text="tag.name"
+                      :style="{backgroundColor: tag.backgroundColor, color: tag.color}"
+                      class="rounded-full bg-black px-2 py-0.5"
+                    ></button>
+                  </template>
+                </div>
+
+                <!-- Project title -->
                 <h3 class="font-bold">
                   <span x-text="project.name"></span>
                 </h3>
@@ -126,12 +141,12 @@
       <!-- FAQ section -->
       <section
         id="faq"
-        class="container mx-auto"
+        class="container mx-auto mt-24"
         x-data="{questions: [1,2,3,4,5]}"
       >
         <h2 class="text-center text-5xl font-bold">FAQ</h2>
 
-        <div x-data="discriminatedToggle()">
+        <div class="mt-8" x-data="discriminatedToggle()">
           <template x-for="question in questions">
             <div>
               <div
@@ -172,10 +187,28 @@
       </section>
 
       <!-- Contact section -->
-      <section id="contact" class="container mx-auto">
+      <section id="contact" class="container mx-auto mt-24">
         <h2 class="text-center text-5xl font-bold">Contact</h2>
-
-        <input type="text" class="rounded-lg bg-transparent" />
+        <form class="mt-8">
+          <div class="grid grid-cols-2 gap-4">
+            <div class="flex flex-col">
+              <label for="name">Nom</label>
+              <input id="name" type="text" class="rounded-lg bg-transparent" />
+            </div>
+            <div class="flex flex-col">
+              <label for="email">Email</label>
+              <input id="email" type="text" class="rounded-lg bg-transparent" />
+            </div>
+            <div class="col-span-2 flex flex-col">
+              <label for="message">Message</label>
+              <textarea
+                id="message"
+                type="text"
+                class="rounded-lg bg-transparent"
+              ></textarea>
+            </div>
+          </div>
+        </form>
       </section>
     </main>
     <script type="module" src="/src/main.ts"></script>
