@@ -1,0 +1,70 @@
+body {
+  font-family: Geist, Inter, sans-serif;
+}
+
+@font-face {
+  font-family: "geist";
+  src: url("/font/Geist_Regular.otf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "geist";
+  src: url("/font/Geist_Black.otf");
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "geist";
+  src: url("/font/Geist_Bold.otf");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "geist";
+  src: url("/font/Geist_Light.otf");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "geist";
+  src: url("/font/Geist_Medium.otf");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "geist";
+  src: url("/font/Geist_SemiBold.otf");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "geist";
+  src: url("/font/Geist_Thin.otf");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "geist";
+  src: url("/font/Geist_UltraBlack.otf");
+  font-weight: 950;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "geist";
+  src: url("/font/Geist_UltraLight.otf");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

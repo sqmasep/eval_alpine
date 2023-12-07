@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + TS</title>
+  </head>
+  <body class="bg-zinc-900 text-zinc-300">
+    <nav
+      class="container sticky top-2 z-50 mx-auto rounded-lg bg-black bg-opacity-5 py-3 backdrop-blur-lg"
+    >
+      <ul class="container mx-auto flex items-center justify-between gap-4">
+        <div class="flex items-center gap-4">
+          <li>
+            <a href="/#home">Accueil</a>
+          </li>
+          <li>
+            <a href="#about">À propos</a>
+          </li>
+
+          <li>
+            <a href="#skills" class=""> Compétences </a>
+          </li>
+
+          <li>
+            <a href="#contact" class=""> Contact </a>
+          </li>
+        </div>
+
+        <li>
+          <a
+            href="#portfolio"
+            class="rounded-lg bg-gray-400 px-2 py-1 transition-all active:translate-y-2"
+          >
+            Portfolio
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <main>
+      <section id="home" class="container relative mx-auto py-36">
+        <div class="flex flex-col items-center justify-center gap-5">
+          <h1 class="text-6xl font-bold">Hello! Je suis Romain</h1>
+          <p class="max-w-lg text-center text-3xl text-zinc-500">
+            Un développeur passionné par
+            <span class="font-semibold text-blue-400">Typescript</span>,
+            <span class="font-semibold text-orange-400">OCaml</span>, et même
+            <span class="font-semibold text-orange-300">Rust</span>
+          </p>
+
+          <button
+            class="mt-4 flex items-center gap-2 rounded-full bg-blue-500 px-6 py-4 text-xl font-medium text-black transition-all hover:shadow-sm hover:shadow-blue-600 active:scale-95"
+          >
+            Découvrir les projets
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 15 15"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M2.14645 11.1464C1.95118 11.3417 1.95118 11.6583 2.14645 11.8536C2.34171 12.0488 2.65829 12.0488 2.85355 11.8536L6.85355 7.85355C7.04882 7.65829 7.04882 7.34171 6.85355 7.14645L2.85355 3.14645C2.65829 2.95118 2.34171 2.95118 2.14645 3.14645C1.95118 3.34171 1.95118 3.65829 2.14645 3.85355L5.79289 7.5L2.14645 11.1464ZM8.14645 11.1464C7.95118 11.3417 7.95118 11.6583 8.14645 11.8536C8.34171 12.0488 8.65829 12.0488 8.85355 11.8536L12.8536 7.85355C13.0488 7.65829 13.0488 7.34171 12.8536 7.14645L8.85355 3.14645C8.65829 2.95118 8.34171 2.95118 8.14645 3.14645C7.95118 3.34171 7.95118 3.65829 8.14645 3.85355L11.7929 7.5L8.14645 11.1464Z"
+                fill="currentColor"
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                data-darkreader-inline-fill=""
+                style="--darkreader-inline-fill: currentColor"
+              ></path>
+            </svg>
+          </button>
+        </div>
+
+        <div class="absolute h-12 w-12 bg-purple-400 blur-3xl"></div>
+        <div
+          class="absolute right-12 top-0 h-12 w-12 bg-blue-600 blur-3xl"
+        ></div>
+      </section>
+
+      <!-- About section -->
+      <section id="about" class="container mx-auto">à propos</section>
+
+      <!-- Projects section -->
+      <section id="projects" x-data="ProjectsService" class="container mx-auto">
+        <div
+          x-data="{categories: CategoriesService().categories, filter: filter(projects)}"
+        >
+          <h2 class="text-center text-5xl font-bold">Mes projets</h2>
+          <p class="text-center">
+            Personnels, professionnels ou universitaires
+          </p>
+
+          <!-- Filters -->
+          <div class="flex items-center gap-2">
+            <template x-for="category in categories">
+              <button
+                x-text="category.name"
+                :style="{backgroundColor: category.backgroundColor, color: category.color}"
+                class="rounded-full border-4 border-solid bg-black px-2 py-1 text-lg"
+                @click="filter.toggleFilter(category.id)"
+                :class="filter.isActive(category.id) ? 'border-zinc-400' : 'border-transparent'"
+              ></button>
+            </template>
+          </div>
+
+          <!-- Projects grid -->
+          <div class="mt-4 grid grid-cols-4 gap-4">
+            <template x-for="project in filter.filteredArray">
+              <div class="rounded-lg border border-zinc-800 p-4">
+                <img
+                  :src="project.imageUrl"
+                  :alt="project.name"
+                  class="h-48 w-full rounded-lg object-cover"
+                />
+                <h3 class="font-bold">
+                  <span x-text="project.name"></span>
+                </h3>
+              </div>
+            </template>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ section -->
+      <section
+        id="faq"
+        class="container mx-auto"
+        x-data="{questions: [1,2,3,4,5]}"
+      >
+        <h2 class="text-center text-5xl font-bold">FAQ</h2>
+
+        <div x-data="discriminatedToggle()">
+          <template x-for="question in questions">
+            <div>
+              <div
+                class="flex items-center justify-between border-b-[1px] border-solid border-zinc-800"
+              >
+                <button
+                  class="w-full p-4 text-start"
+                  @click="toggleItem(question)"
+                >
+                  Question
+                  <span x-text="question"></span>
+                </button>
+
+                <svg
+                  class="transform transition-transform"
+                  :class="{'rotate-180': isOpen(question)}"
+                  width="15"
+                  height="15"
+                  viewBox="0 0 15 15"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M4.18179 6.18181C4.35753 6.00608 4.64245 6.00608 4.81819 6.18181L7.49999 8.86362L10.1818 6.18181C10.3575 6.00608 10.6424 6.00608 10.8182 6.18181C10.9939 6.35755 10.9939 6.64247 10.8182 6.81821L7.81819 9.81821C7.73379 9.9026 7.61934 9.95001 7.49999 9.95001C7.38064 9.95001 7.26618 9.9026 7.18179 9.81821L4.18179 6.81821C4.00605 6.64247 4.00605 6.35755 4.18179 6.18181Z"
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    data-darkreader-inline-fill=""
+                    style="--darkreader-inline-fill: currentColor"
+                  ></path>
+                </svg>
+              </div>
+
+              <div x-show="isOpen(question)" class="bg-gray-400 p-4">open!</div>
+            </div>
+          </template>
+        </div>
+      </section>
+
+      <!-- Contact section -->
+      <section id="contact" class="container mx-auto">
+        <h2 class="text-center text-5xl font-bold">Contact</h2>
+
+        <input type="text" class="rounded-lg bg-transparent" />
+      </section>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
