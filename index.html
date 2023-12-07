@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + TS</title>
   </head>
-  <body class="bg-zinc-900 text-zinc-300">
+  <body class="bg-zinc-900 px-4 text-zinc-300">
     <nav
       x-data="toggle"
       class="container sticky top-2 z-40 mx-auto rounded-lg bg-black bg-opacity-5 p-3 backdrop-blur-lg"
@@ -57,18 +57,18 @@
           class="flex items-center gap-4"
           :class="isOpen && 'flex-col items-center justify-center'"
         >
-          <li @click="toggleOpen(false)">
+          <li>
             <a href="/#home">Accueil</a>
           </li>
-          <li @click="toggleOpen(false)">
+          <li>
             <a href="#about">À propos</a>
           </li>
 
-          <li @click="toggleOpen(false)">
+          <li>
             <a href="#skills" class="">Compétences</a>
           </li>
 
-          <li @click="toggleOpen(false)">
+          <li>
             <a href="#contact" class="">Contact</a>
           </li>
         </div>
